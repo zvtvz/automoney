@@ -1,14 +1,16 @@
 阅读下面文章前，请保证[**zvt**](https://github.com/zvtvz/zvt)的环境已经准备好。
 
 >源码:  
->https://github.com/zvtvz/zvt
+>https://github.com/zvtvz/zvt  
 >https://gitee.com/null_071_4607/zvt
 
 >文档:  
->https://zvtvz.github.io/zvt/
+>https://zvtvz.github.io/zvt/  
 >http://zvt.foolcage.com
 
 ## 1. 资金流相关概念
+
+资金流本质上是资金进出的记录，对其进行各种维度的观察，从而了然市场的资金在干什么，进而选择该干什么，是非常有意义的。  
 
 ### 1.1 竞价交易
 对于 **价格优先 时间优先** 的 **竞价交易** 市场，成交的方式有三种：
@@ -58,6 +60,14 @@
 - 大盘资金流
 
 这个很好理解，板块和大盘不过是个股资金流的累加。
+
+### 1.4 资金流的几个观察
+
+- 单日资金流意义不大,一般统计某个窗口(10日，２０日)才有参考价值
+- 巨量流出(流入)伴随高位(低位)往往是见顶(底)的标志
+- 下跌中流入，上涨中流出，往往会形成所谓的背驰（背离）
+
+这些都可以通过数据来对其进行佐证，下一节会在回测策略中对其进行更具体的分析。
 
 ## 2. 数据结构定义
 
@@ -232,6 +242,7 @@ new_zzhy    new_zzhy  造纸行业
 
 ### 3.2.2 覆盖 init_entities
 
+在　init_entities　中设置需要抓取的entity,这里是新浪提供的概念和行业。
 ```
     def init_entities(self):
         self.entity_session = get_db_session(provider=self.entity_provider, data_schema=self.entity_schema)
@@ -245,6 +256,8 @@ new_zzhy    new_zzhy  造纸行业
                                      filters=[Index.category.in_(
                                          [StockCategory.industry.value, StockCategory.concept.value])])
 ```
+
+> [**recorder**](https://github.com/zvtvz/zvt/blob/master/zvdata/recorder.py)类会自动遍历相应的entity,并从其相应的历史记录的最新位置继续抓取。
 
 ### 3.2.3 实现抓取逻辑
 ```
@@ -356,4 +369,4 @@ timestamp
 ## 6. 小结
 
 通过这篇文章，我们基本了解了资金流是什么，zvt中数据的定义，抓取，api使用以及基本的可视化分析。
-那么，如何在zvt中使用　板块资金流　和　个股资金流来选股并做回测呢？　我们下一节见！
+那么，如何在zvt中使用　**板块资金流**　和　**个股资金流** 来选股并做回测呢？　我们下一节见！
