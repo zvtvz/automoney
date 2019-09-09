@@ -48,11 +48,19 @@
 而根据成交金额大小的不同，可以分为：  
 
 - 主力流入
-- 主流流出
+- 主力流出
 - 散户流入
 - 散户流出
 
 > 不同的数据提供商对　**主力**　和　**散户**　**成交金额** 的定义不同，但这并不影响操作，知道其含义即可。
+
+例如，新浪对大，中，小单，主力，散户的定义如下：
+>
+主力	　	单笔成交额>=100万元  
+散户	　	单笔成交额<=5万元  
+小单	　	单笔成交5万元-20万元  
+大单	　	单笔成交20万-100万元  
+特大单	　	单笔成交100万元以上  
 
 
 ### 1.3.2 横向分类
@@ -74,7 +82,8 @@
 
 ## 2. 数据结构定义
 
-[*money_flow*](https://github.com/zvtvz/zvt/blob/master/zvt/domain/money_flow.py)
+zvt数据的使用需要在domain里面先对其进行定义，[*money_flow*](https://github.com/zvtvz/zvt/blob/master/zvt/domain/money_flow.py)的定义如下：
+
 ```
 # 板块资金流向
 @register_api(provider='sina')
@@ -149,13 +158,14 @@ class StockMoneyFlow(MoneyFlowBase, Mixin):
 
 register_schema(providers=['sina'], db_name='money_flow', schema_base=MoneyFlowBase)
 ```
-新浪对大，中，小单，主力，散户的定义如下：
->
-主力	　	单笔成交额>=100万元  
-散户	　	单笔成交额<=5万元  
-小单	　	单笔成交5万元-20万元  
-大单	　	单笔成交20万-100万元  
-特大单	　	单笔成交100万元以上  
+
+这里的关键点在于，数据的注册：
+
+```
+register_schema(providers=['sina'], db_name='money_flow', schema_base=MoneyFlowBase)
+```
+
+其中providers可以设置多个，比如providers=['sina','eastmoney'],这样就可以进行数据的交叉验证了。zvt里面对数据的处理是先定义数据标准格式，然后注册支持数据的provider,这为数据的稳定性提供了坚实的基础，即使某些provider不可用了，也不会影响后面的分析程序。
 
 ## 3. 获取板块资金流
 
@@ -352,14 +362,13 @@ In [16]: df=get_index_money_flow(provider='sina',codes=['new_cmyl','new_jrhy'])
 
 In [17]: df
 Out[17]: 
-                                      id          entity_id  timestamp      code  name    close  change_pct  turnover_rate   net_inflows  net_inflow_rate  net_main_inflows  net_main_inflow_rate net_huge_inflows net_huge_inflow_rate net_big_inflows net_big_inflow_rate net_medium_inflows net_medium_inflow_rate net_small_inflows net_small_inflow_rate
+                                      id          entity_id  timestamp      code  name    close  change_pct  turnover_rate   net_inflows  net_inflow_rate  net_main_inflows  net_main_inflow_rate 
 timestamp
-2011-06-16  index_cn_new_cmyl_2011-06-16  index_cn_new_cmyl 2011-06-16  new_cmyl  传媒娱乐  11.2669   -0.016522       0.007802 -2.508056e+07        -0.041988      5.198664e+06              0.008703             None                 None            None                None               None                   None              None                  None
-2011-06-16  index_cn_new_jrhy_2011-06-16  index_cn_new_jrhy 2011-06-16  new_jrhy  金融行业   5.0747   -0.005256       0.001426 -4.057816e+07        -0.006909     -1.272530e+08             -0.021667             None                 None            None                None               None                   None              None                  None
-2011-06-17  index_cn_new_cmyl_2011-06-17  index_cn_new_cmyl 2011-06-17  new_cmyl  传媒娱乐  11.1325   -0.011932       0.005178 -4.188237e+07        -0.106854      2.341741e+06              0.005974             None                 None            None                None               None                   None              None                  None
-2011-06-17  index_cn_new_jrhy_2011-06-17  index_cn_new_jrhy 2011-06-17  new_jrhy  金融行业   5.0531   -0.002186       0.001699 -4.992907e+08        -0.071639     -1.747691e+08             -0.025076             None                 None            None                None               None                   None              None                  None
-2011-06-20  index_cn_new_cmyl_2011-06-20  index_cn_new_cmyl 2011-06-20  new_cmyl  传媒娱乐  11.0192   -0.010178       0.005508  6.897316e+06         0.016720      7.367255e+06              0.017859             None                 None            None                None               None                   None              None                  None
-
+2011-06-16  index_cn_new_cmyl_2011-06-16  index_cn_new_cmyl 2011-06-16  new_cmyl  传媒娱乐  11.2669   -0.016522       0.007802 -2.508056e+07        -0.041988      5.198664e+06              0.008703  
+2011-06-16  index_cn_new_jrhy_2011-06-16  index_cn_new_jrhy 2011-06-16  new_jrhy  金融行业   5.0747   -0.005256       0.001426 -4.057816e+07        -0.006909     -1.272530e+08             -0.021667  
+2011-06-17  index_cn_new_cmyl_2011-06-17  index_cn_new_cmyl 2011-06-17  new_cmyl  传媒娱乐  11.1325   -0.011932       0.005178 -4.188237e+07        -0.106854      2.341741e+06              0.005974  
+2011-06-17  index_cn_new_jrhy_2011-06-17  index_cn_new_jrhy 2011-06-17  new_jrhy  金融行业   5.0531   -0.002186       0.001699 -4.992907e+08        -0.071639     -1.747691e+08             -0.025076  
+2011-06-20  index_cn_new_cmyl_2011-06-20  index_cn_new_cmyl 2011-06-20  new_cmyl  传媒娱乐  11.0192   -0.010178       0.005508  6.897316e+06         0.016720      7.367255e+06              0.017859  
 ```
 
 ## 5. 使用zvt的可视化分析
