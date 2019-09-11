@@ -5,12 +5,15 @@
 - 侧重投资领域的知识要点
 - 融合各种投资流派并辨真伪
 
-文章会同步发布在:  
+## 目录
+
+### [资金流向１-数据获取与分析](https://github.com/zvtvz/automoney/blob/master/money-flow1.md)
+
+### [资金流向2-如何通过资金流选股](https://github.com/zvtvz/automoney/blob/master/money-flow2.md)
+
+
+文章会同步发布在知乎专栏:  
 https://zhuanlan.zhihu.com/automoney
 
 公众号:  
-<img src="./imgs/gongzhonghao.jpg" width="50%" alt="公众号">
-
-## 目录
-
-### [资金流向１](https://github.com/zvtvz/automoney/blob/master/money-flow.md)
+<img src="./imgs/gongzhonghao.jpg" width="25%" alt="公众号">
