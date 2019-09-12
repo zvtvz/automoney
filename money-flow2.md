@@ -219,3 +219,13 @@ class TechnicalSelector(TargetSelector):
 
 通过这篇文章，我们基本了解了如何使用　ScoreFactor　进行板块选择，并在此基础上结合个股技术指标来进行综合选股。
 选出来是选出来了，其历史表现如何呢？我们下一节见。
+
+---
+**知乎专栏**:  
+https://zhuanlan.zhihu.com/automoney  
+
+**github**:  
+https://github.com/zvtvz/automoney
+
+**公众号**:  
+<img src="./imgs/gongzhonghao.jpg" width="25%" alt="公众号">

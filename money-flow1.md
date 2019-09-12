@@ -383,3 +383,13 @@ timestamp
 
 通过这篇文章，我们基本了解了资金流是什么，zvt中数据的定义，抓取，api使用以及基本的可视化分析。
 那么，如何在zvt中使用　**板块资金流**　和　**个股资金流** 来选股并做回测呢？　我们下一节见！
+
+---
+**知乎专栏**:  
+https://zhuanlan.zhihu.com/automoney  
+
+**github**:  
+https://github.com/zvtvz/automoney
+
+**公众号**:  
+<img src="./imgs/gongzhonghao.jpg" width="25%" alt="公众号">

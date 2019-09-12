@@ -11,9 +11,12 @@
 
 ### [资金流向2-如何通过资金流选股](https://github.com/zvtvz/automoney/blob/master/money-flow2.md)
 
+---
+**知乎专栏**:  
+https://zhuanlan.zhihu.com/automoney  
 
-文章会同步发布在知乎专栏:  
-https://zhuanlan.zhihu.com/automoney
+**github**:  
+https://github.com/zvtvz/automoney
 
-公众号:  
+**公众号**:  
 <img src="./imgs/gongzhonghao.jpg" width="25%" alt="公众号">
