@@ -11,6 +11,8 @@
 
 ### [资金流向2-如何通过资金流选股](https://github.com/zvtvz/automoney/blob/master/money-flow2.md)
 
+### [ **ETF** 的逻辑与影响](https://github.com/zvtvz/automoney/blob/master/etf.md)
+
 ---
 **知乎专栏**:  
 https://zhuanlan.zhihu.com/automoney  
